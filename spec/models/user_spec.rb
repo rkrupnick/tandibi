@@ -42,18 +42,13 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
     end
 
-    it "is valid when username is unique" do
-      create_a_user
-      user = User.new
-      user.username = "IAmAdam"
-      expect(user.valid?).to be true  
-    end
 
     it "is invalid if the username is taken" do
-      create_a_user(username: "IAmAdam")
-      user = User.new
-      user.username = "IAmAdam"
-      expect(user).not_to be_valid
+      user = create_a_user
+      another_user = create(:user)
+      expect(another_user).to be_valid
+      another_user.username = user.username
+      expect(another_user).not_to be_valid
     end
   end
 end
