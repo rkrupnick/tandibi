@@ -35,4 +35,8 @@ class User < ApplicationRecord
     has_many :inward_bonds,
         class_name: "Bond",
         foreign_key: :friend_id
+    has_many :followers,
+        -> { where("bonds.state = ?", Bond::FOLLOWING ) },
+        through: :inward_bonds,
+        source: :user
 end
