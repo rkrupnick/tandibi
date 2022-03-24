@@ -25,11 +25,11 @@ class User < ApplicationRecord
 
     has_many :bonds
     has_many :followings,
-        -> { where("bonds.state = ?", Bond::FOLLOWING ) },
+        -> { Bond.following },
         through: :bonds,
         source: :friend
     has_many :follow_requests,
-        -> { where("bonds.state = ?", Bond::REQUESTING ) },
+        -> { Bond.requesting },
         through: :bonds,
         source: :friend
     has_many :inward_bonds,
@@ -44,6 +44,6 @@ class User < ApplicationRecord
     private
         def ensure_proper_name_case
             self.first_name = first_name.capitalize
-            
+
         end
 end
