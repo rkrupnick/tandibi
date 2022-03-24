@@ -25,5 +25,5 @@ class Bond < ApplicationRecord
         BLOCKING = "blocking",
 ].freeze
 
-    validates :state, presence: true, inclusion { in: STATES }
+    validates :state, presence: true, inclusion: { in: STATES }
 end

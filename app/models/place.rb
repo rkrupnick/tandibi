@@ -28,5 +28,5 @@ class Place < ApplicationRecord
     validates :coordinate, presence: true
     validates :locale, presence: true
     validates :name, presence: true
-    validates :place_type, inclusion { in: PLACE_TYPES }
+    validates :place_type, inclusion: { in: PLACE_TYPES }
 end
