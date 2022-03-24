@@ -19,23 +19,16 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  def create_a_user(email: "#{SecureRandom.hex(4) }@example.org")
-    User.create!(
-      first_name: "Adam",
-      email: email,
-      username: SecureRandom.hex(4),
-    )
-  end
 
   describe '#valid?' do
     it "is valid when email is unique" do
-      user = create_a_user
+      user = create(:user)
       user.email = "adam@example.org"
       expect(user).to be_valid 
     end
 
     it "is invalid if the email is taken" do
-      create_a_user(email: "adam@example.org")
+      create(:user, email: "adam@example.org")
       user = User.new
       user.email = "adam@example.org"
       expect(user).not_to be_valid
@@ -43,15 +36,15 @@ RSpec.describe User, type: :model do
 
 
     it "is invalid if the username is taken" do
-      user = create_a_user
-      another_user = create_a_user
+      user = create(:user)
+      another_user = create(:user)
       expect(another_user).to be_valid
       another_user.username = user.username
       expect(another_user).not_to be_valid
     end
 
     it "is invalid if the user's first name is blank" do
-      user = create_a_user
+      user = create(:user)
       expect(user).to be_valid
       user.first_name = ""
       expect(user).not_to be_valid
@@ -60,7 +53,7 @@ RSpec.describe User, type: :model do
     end
 
     it "is invalid if the email looks bogus" do
-      user = create_a_user
+      user = create(:user)
       expect(user).to be_valid
       user.email = ""
       expect(user).to be_invalid
@@ -79,10 +72,10 @@ RSpec.describe User, type: :model do
 
   describe "#followings" do 
     it "can list all of the user's followings" do
-      user = create_a_user
-      friend1 = create_a_user
-      friend2 = create_a_user
-      friend3 = create_a_user
+      user = create(:user)
+      friend1 = create(:user)
+      friend2 = create(:user)
+      friend3 = create(:user)
 
       Bond.create user: user,
         friend: friend1,
@@ -101,12 +94,12 @@ RSpec.describe User, type: :model do
 
   describe "#followers" do
     it "can list all of the user's followers" do
-      user1 = create_a_user
-      user2 = create_a_user
-      fol1 = create_a_user
-      fol2 = create_a_user
-      fol3 = create_a_user
-      fol4 = create_a_user
+      user1 = create(:user)
+      user2 = create(:user)
+      fol1 = create(:user)
+      fol2 = create(:user)
+      fol3 = create(:user)
+      fol4 = create(:user)
       Bond.create user: fol1,
           friend: user1,
           state: Bond::FOLLOWING
@@ -126,7 +119,7 @@ RSpec.describe User, type: :model do
 
   describe "#save" do
     it "capitalized the name correctly" do
-      user = create_a_user
+      user = create(:user)
       user.first_name = "AdaM"
       user.last_name = "van der Berg"
       user.save
