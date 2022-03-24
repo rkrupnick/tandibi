@@ -25,5 +25,8 @@ class Bond < ApplicationRecord
         BLOCKING = "blocking",
 ].freeze
 
+    belongs_to :user
+    belongs_to :friend, class_name: "User"
+
     validates :state, presence: true, inclusion: { in: STATES }
 end
