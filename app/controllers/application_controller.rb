@@ -1,8 +1,22 @@
 class ApplicationController < ActionController::Base
+    before_action :config_devise_parama, if: :devise_controller?
+    
     layout :layout_by_resource
     
     private
     def layout_by_resource
         devise_controller? ? "session" : "application"
+    end
+
+    protected
+    def config_devise_parama
+        devise_parameter_sanatizer.permit(:sign_up, keys: [
+            :first_name,
+            :last_name,
+            :username,
+            :email,
+            :password,
+            :password_confirmation
+        ])
     end
 end
