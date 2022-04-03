@@ -16,7 +16,7 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'devise', '~> 4.7'
-gem 'evil-icons'
+gem 'evil_icons'
 gem 'premailer-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
