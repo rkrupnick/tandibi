@@ -28,7 +28,7 @@ header .title {
 .home
 .action .arrow {
   @apply flex items-center justify-center;
-  @apply bg-blue-500 rounded-full w-6 h-6 text-xs;
+  @apply bg-teal-500 rounded-full w-6 h-6 text-xs;
 }
 
 .home
