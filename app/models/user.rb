@@ -84,6 +84,11 @@ class User < ApplicationRecord
     end
 
     before_save :ensure_proper_name_case
+
+    def to_param
+        username
+    end
+
     private
         def ensure_proper_name_case
             self.first_name = first_name.capitalize
