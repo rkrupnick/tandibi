@@ -8,7 +8,6 @@ module TimelinesHelper
     end
 
     def on_self?
-        on_timeline? && action_name == "show"
-            && params[:username] == current_user.username
+        on_timeline? && action_name == "show" && params[:username] == current_user.username
     end
 end
